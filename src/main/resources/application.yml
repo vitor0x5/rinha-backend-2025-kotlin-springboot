@@ -1,0 +1,27 @@
+server:
+  port: 9999
+
+spring:
+  main:
+    lazy-initialization: true
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.web.SpringDataWebAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.rest.RepositoryRestMvcAutoConfiguration
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password:
+      timeout: 10
+  threads:
+    virtual:
+      enabled: true
+
+url:
+  default-payment-processor: http://localhost:8001
+  fallback-payment-processor: http://localhost:8002
+  health-check: http://localhost:8001

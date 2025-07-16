@@ -1,0 +1,15 @@
+server:
+  port: 9999
+
+spring:
+  data:
+    redis:
+      host: redis
+      port: 6379
+      password:
+      timeout: 10
+
+url:
+  default-payment-processor: http://payment-processor-default:8080
+  fallback-payment-processor: http://payment-processor-fallback:8080
+  health-check: http://payment-processor-default:8080
