@@ -22,6 +22,6 @@ spring:
       enabled: true
 
 url:
-  default-payment-processor: http://localhost:8001
-  fallback-payment-processor: http://localhost:8002
-  health-check: http://localhost:8001
+  default: http://localhost:8001
+  fallback: http://localhost:8002
+  health: http://localhost:8001

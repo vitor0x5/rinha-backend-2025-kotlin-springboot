@@ -16,11 +16,6 @@ import java.util.concurrent.Executors
 class Configurations {
 
     @Bean
-    fun connectionFactory(): LettuceConnectionFactory {
-        return LettuceConnectionFactory()
-    }
-
-    @Bean
     fun redisTemplate(connectionFactory: RedisConnectionFactory?): RedisTemplate<*, *> {
         val template: RedisTemplate<*, *> = RedisTemplate<Any, Any>()
         template.connectionFactory = connectionFactory!!

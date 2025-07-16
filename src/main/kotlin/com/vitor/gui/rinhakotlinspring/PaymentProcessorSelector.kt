@@ -14,10 +14,10 @@ class PaymentProcessorSelector(
     private val restClient: RestClient,
     private val redisTemplate: RedisTemplate<String, Char>,
 
-    @Value("\${url.health-check}")
+    @Value("\${url.health}")
     private val defaultHealthCheckUrl: String?,
 
-    @Value("\${url.fallback-payment-processor}")
+    @Value("\${url.fallback}")
     private val fallbackHealthCheckUrl: String?
 ) {
     companion object{

@@ -1,0 +1,78 @@
+services:
+  redis:
+    image: redis:7.2-alpine
+    container_name: redis-db
+    command: redis-server --save "" --appendonly no --maxclients 20000
+    networks:
+      - payment-api
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports:
+        - "6379:6379"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "100MB"
+
+  nginx:
+    container_name: nginx
+    image: nginx:1.27.1-alpine
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - payment-api-1
+      - payment-api-2
+    ports:
+      - "9999:9999"
+    networks:
+      - payment-api
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "50MB"
+
+  payment-api-1:
+    container_name: payment-api-1
+    image: vitorgui-kotlin-rinha2025:0.0.7
+    ports:
+      - "9091:80"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dockerized
+      - URL_HEALTH=http://payment-processor-default:8080
+    networks:
+      - payment-api
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "1000MB"
+
+  payment-api-2:
+    container_name: payment-api-2
+    image: vitorgui-kotlin-rinha2025:0.0.7
+    ports:
+      - "9092:80"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dockerized
+      - URL_HEALTH=
+    networks:
+      - payment-api
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "1000MB"
+
+
+networks:
+  payment-api:
+    driver: bridge
+  payment-processor:
+    external: true

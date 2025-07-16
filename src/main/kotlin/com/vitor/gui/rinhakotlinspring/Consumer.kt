@@ -18,10 +18,10 @@ class Consumer(
     private val restClient: RestClient,
     private val paymentProcessorSelector: PaymentProcessorSelector,
 
-    @Value("\${url.default-payment-processor}")
+    @Value("\${url.default}")
     private val defaultProcessorUrl: String,
 
-    @Value("\${url.fallback-payment-processor}")
+    @Value("\${url.fallback}")
     private val fallbackProcessorUrl: String
 ) {
     companion object {
