@@ -51,7 +51,7 @@ services:
       resources:
         limits:
           cpus: "0.5"
-          memory: "1000MB"
+          memory: "100MB"
 
   payment-api-2:
     container_name: payment-api-2
@@ -68,7 +68,7 @@ services:
       resources:
         limits:
           cpus: "0.5"
-          memory: "1000MB"
+          memory: "100MB"
 
 
 networks:
